@@ -26,3 +26,37 @@ Enable GPU usage:
 Python dependency manager:
 
 - [Install](https://docs.astral.sh/uv/getting-started/installation/)
+
+## File Structure
+
+```bash
+.
+├── data/
+├── docker/
+├── experiments/
+├── models/
+│
+├── src/
+│   ├── classifier/
+│   ├── dataset/
+│   ├── evaluator/
+│   ├── trainer/
+│   └── main.py
+│
+├── pyproject.toml
+├── README.md
+└── uv.lock
+```
+
+Intended usage:
+
+- `data/`: Store datasets and input data
+- `docker/`: Store dockerfiles
+- `experiments/`: Store artifacts of training and evaluation (models, logs, etc)
+- `models/`: Store models and configurations for inference (deploy)
+- `src/`: Project code
+    1. `classifier/`: Classifier model (inference, pre/post-processing)
+    1. `dataset/`: Dataset dealer (dataloader)
+    1. `evaluator/`: Evaluation metrics dealer
+    1. `trainer/`: Orchestrator for training procedure (configurations applier)
+    1. `main.py`: Function selector (API routes)
