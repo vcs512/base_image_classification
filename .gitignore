@@ -33,3 +33,12 @@ coverage.xml
 
 # Jupyter Notebook
 .ipynb_checkpoints
+
+# Data
+data/
+
+# Experiment artifacts
+experiments/
+
+# Models
+models/
