@@ -60,3 +60,9 @@ Intended usage:
     1. `evaluator/`: Evaluation metrics dealer
     1. `trainer/`: Orchestrator for training procedure (configurations applier)
     1. `main.py`: Function selector (API routes)
+
+## Classify Images
+
+```bash
+docker compose up --build infer
+```
