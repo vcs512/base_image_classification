@@ -4,4 +4,18 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     volumes:
-      - ./:/app/
+      - ./src/:/app/src/
+      - ./data/:/app/data/
+      - ./experiments/:/app/experiments/
+      - ./models/:/app/models/
+
+  infer:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./src/:/app/src/
+      - ./data/:/app/data/
+      - ./experiments/:/app/experiments/
+      - ./models/:/app/models/
+    entrypoint: ["uv", "run", "-m", "src.classifier.classifier_controller"]
