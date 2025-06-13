@@ -14,6 +14,7 @@ class Classifier:
         device: torch.device,
         eval_only_flag: bool
     ) -> None:
+        self.device = device
         self.eval_only_flag = eval_only_flag
         self.processor = ViTImageProcessor.from_pretrained(
             pretrained_model_name_or_path=model_dir_path,
@@ -32,6 +33,7 @@ class Classifier:
 
     def infer(self, input_batch: List[np.ndarray]) -> any:
         inputs = self.processor(images=input_batch, return_tensors="pt")
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
         outputs = self.model(**inputs)
         return outputs
 
