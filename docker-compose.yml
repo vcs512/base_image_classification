@@ -8,6 +8,13 @@ services:
       - ./data/:/app/data/
       - ./experiments/:/app/experiments/
       - ./models/:/app/models/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
   infer:
     build:
@@ -18,4 +25,14 @@ services:
       - ./data/:/app/data/
       - ./experiments/:/app/experiments/
       - ./models/:/app/models/
+      - ./example_payloads/:/app/example_payloads/
+    environment:
+      - INFERENCE_JSON_PATH=/app/example_payloads/inference.json
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     entrypoint: ["uv", "run", "-m", "src.classifier.classifier_controller"]

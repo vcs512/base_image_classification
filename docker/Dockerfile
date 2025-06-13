@@ -1,5 +1,6 @@
-FROM nvidia/cuda:12.9.0-cudnn-runtime-ubuntu24.04 AS vcs_base_image_classification
+FROM pytorch/pytorch:2.7.1-cuda11.8-cudnn9-runtime AS vcs_base_image_classification
 
+ENV DEBIAN_FRONTEND=noninteractive 
 ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update \
