@@ -1,0 +1,4 @@
+{
+    "model_dir_path": "./models/swinv2-small-patch4-window8-256/",
+    "input_images_dir": "./data/sports100/train/formula 1 racing"
+}
