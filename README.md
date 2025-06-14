@@ -33,8 +33,10 @@ Python dependency manager:
 .
 ├── data/
 ├── docker/
+├── example_payloads/
 ├── experiments/
 ├── models/
+├── tests/
 │
 ├── src/
 │   ├── classifier/
@@ -52,8 +54,10 @@ Intended usage:
 
 - `data/`: Store datasets and input data
 - `docker/`: Store dockerfiles
+- `example_payloads/`: Example input payloads
 - `experiments/`: Store artifacts of training and evaluation (models, logs, etc)
 - `models/`: Store models and configurations for inference (deploy)
+- `tests/`: Sanity tests scripts
 - `src/`: Project code
     1. `classifier/`: Classifier model (inference, pre/post-processing)
     1. `dataset/`: Dataset dealer (dataloader)
@@ -63,6 +67,19 @@ Intended usage:
 
 ## Classify Images
 
+Input JSON structure
+([example inference payload](./example_payloads/inference.json)):
+
+```json
+{
+    "model_dir_path": path to the classifier model (ViT preprocessor),
+    "input_images_dir": path to the dir with the images to be inferred
+}
+```
+
+Assign the env var `INFERENCE_JSON_PATH` to the desired input payload JSON path
+at the [docker-compose file](./docker-compose.yml)
+
 ```bash
-docker compose up --build infer
+docker compose up --build inference
 ```
