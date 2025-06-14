@@ -1,11 +1,11 @@
-import numpy as np
-import torch
 from pathlib import Path
 from typing import List
 
+import numpy as np
+import torch
+
 from .classifier import Classifier
 from .classifier_interface import ClassificationPipelineOutputInterface
-
 
 BATCH_SIZE = 64
 
@@ -14,10 +14,7 @@ class ClassifierController:
     """Classification model controller"""
 
     def __init__(
-        self,
-        model_dir_path: Path,
-        device: torch.device,
-        eval_only_flag: bool
+        self, model_dir_path: Path, device: torch.device, eval_only_flag: bool
     ) -> None:
         """Construct and initialize classification model
 
@@ -29,12 +26,11 @@ class ClassifierController:
         self.classifier = Classifier(
             model_dir_path=model_dir_path,
             device=device,
-            eval_only_flag=eval_only_flag
+            eval_only_flag=eval_only_flag,
         )
 
     def get_probabilities(
-        self,
-        input_batch: List[np.ndarray]
+        self, input_batch: List[np.ndarray]
     ) -> List[List[ClassificationPipelineOutputInterface]]:
         """Classify the input batch of the model.
             Divides the input in mini batches to avoid memory overflow

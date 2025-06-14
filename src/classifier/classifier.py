@@ -1,9 +1,10 @@
+from pathlib import Path
+from typing import List
+
 import numpy as np
 import torch
 import transformers.modeling_outputs
-from pathlib import Path
 from transformers import AutoModelForImageClassification, ViTImageProcessor
-from typing import List
 
 from .classifier_interface import ClassificationPipelineOutputInterface
 
@@ -12,10 +13,7 @@ class Classifier:
     """Image Classification model"""
 
     def __init__(
-        self,
-        model_dir_path: Path,
-        device: torch.device,
-        eval_only_flag: bool
+        self, model_dir_path: Path, device: torch.device, eval_only_flag: bool
     ) -> None:
         """Construct and initiate model and processor
 
@@ -27,8 +25,7 @@ class Classifier:
         self.device = device
         self.eval_only_flag = eval_only_flag
         self.processor = ViTImageProcessor.from_pretrained(
-            pretrained_model_name_or_path=model_dir_path,
-            use_fast=True
+            pretrained_model_name_or_path=model_dir_path, use_fast=True
         )
         self.model = AutoModelForImageClassification.from_pretrained(
             pretrained_model_name_or_path=model_dir_path
@@ -43,8 +40,7 @@ class Classifier:
         torch.set_grad_enabled(mode=False)
 
     def infer(
-        self,
-        input_batch: List[np.ndarray]
+        self, input_batch: List[np.ndarray]
     ) -> transformers.modeling_outputs.ImageClassifierOutput:
         """Processor and model forward pass
 
@@ -63,7 +59,7 @@ class Classifier:
 
     def get_probabilities(
         self,
-        inference_output: transformers.modeling_outputs.ImageClassifierOutput
+        inference_output: transformers.modeling_outputs.ImageClassifierOutput,
     ) -> List[List[ClassificationPipelineOutputInterface]]:
         """Return formatted probabilities of the classification model
 
@@ -87,7 +83,7 @@ class Classifier:
             for class_idx in sorted_idx_list:
                 output_interface = ClassificationPipelineOutputInterface(
                     label=self.model.config.id2label[class_idx],
-                    score=float(probabilities[class_idx])
+                    score=float(probabilities[class_idx]),
                 )
                 image_labels_scores_list.append(output_interface)
             batch_labels_scores_list.append(image_labels_scores_list)
