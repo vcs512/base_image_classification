@@ -16,7 +16,7 @@ services:
               count: 1
               capabilities: [gpu]
 
-  infer:
+  inference:
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -26,6 +26,7 @@ services:
       - ./experiments/:/app/experiments/
       - ./models/:/app/models/
       - ./example_payloads/:/app/example_payloads/
+      - ./tests/:/app/tests/
     environment:
       - INFERENCE_JSON_PATH=/app/example_payloads/inference.json
     deploy:
@@ -35,4 +36,4 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-    entrypoint: ["uv", "run", "-m", "src.classifier.classifier_controller"]
+    entrypoint: ["uv", "run", "-m", "tests.inference"]
