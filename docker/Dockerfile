@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.7.1-cuda11.8-cudnn9-runtime AS vcs_base_image_classification
+FROM ubuntu:24.04 AS vcs_base_image_classification
 
 ENV DEBIAN_FRONTEND=noninteractive 
 ENV PYTHONUNBUFFERED=1

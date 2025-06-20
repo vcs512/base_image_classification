@@ -1,0 +1,6 @@
+{
+    "model_dir_path": "./models/model/dir/",
+    "data_root_dir": "./data/dataset/dir/",
+    "transformed_output_dir": "./data/check_transforms/dir",
+    "train_samples_to_save": 10
+}

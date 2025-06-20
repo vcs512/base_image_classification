@@ -30,7 +30,7 @@ if __name__ == "__main__":
         seq=Path(inference_payload.input_images_dir).iterdir()
     )
     input_batch = [
-        cv2.imread(filename=filename, flags=cv2.IMREAD_COLOR)
+        cv2.imread(filename=filename, flags=cv2.IMREAD_COLOR_RGB)
         for filename in images_path_list
     ]
     batch_probabilities = classifier_controller.get_probabilities(

@@ -3,6 +3,7 @@ from typing import List
 
 import numpy as np
 import torch
+from transformers import ViTImageProcessor
 
 from .classifier import Classifier
 from .classifier_interface import ClassificationPipelineOutputInterface
@@ -55,3 +56,11 @@ class ClassifierController:
                 )
             )
         return probabilities_list
+
+    def get_processor(self) -> ViTImageProcessor:
+        """Return the image processor
+
+        Returns:
+            ViTImageProcessor: Model image processor
+        """
+        return self.classifier.get_processor()
