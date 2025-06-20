@@ -37,3 +37,25 @@ services:
               count: 1
               capabilities: [gpu]
     entrypoint: ["uv", "run", "-m", "tests.inference"]
+
+  dataset-check:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./src/:/app/src/
+      - ./data/:/app/data/
+      - ./experiments/:/app/experiments/
+      - ./models/:/app/models/
+      - ./example_payloads/:/app/example_payloads/
+      - ./tests/:/app/tests/
+    environment:
+      - DATASET_CHECK_JSON_PATH=/app/example_payloads/dataset_check.json
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    entrypoint: ["uv", "run", "-m", "tests.dataset_check"]

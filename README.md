@@ -5,6 +5,8 @@ Architecture and code to be used for Computer Vision Image Classification task.
 ## Base References
 
 - [Hugging Face Community Computer Vision Course](https://huggingface.co/docs/transformers/tasks/image_classification)
+- [Transformers-tutorials](https://github.com/NielsRogge/Transformers-Tutorials/tree/master)
+- [Dataset construction](https://huggingface.co/docs/datasets/image_load#imagefolder)
 
 ## Environment Setup
 
@@ -82,4 +84,27 @@ at the [docker-compose file](./docker-compose.yml)
 
 ```bash
 docker compose up --build inference
+```
+
+## Dataset check
+
+Use for check the load and augmentations to a `imagefolder`-like dataset.
+
+Input JSON structure
+([example dataset_check payload](./example_payloads/dataset_check.json)):
+
+```json
+{
+    "model_dir_path": path to the classifier model (ViT preprocessor),
+    "data_root_dir": path to the root dir of a 'imagefolder' dataset,
+    "transformed_output_dir": path to the dir to save some augmented samples,
+    "train_samples_to_save": number of augmentated samples to save
+}
+```
+
+Assign the env var `DATASET_CHECK_JSON_PATH` to the desired input payload JSON
+path at the [docker-compose file](./docker-compose.yml)
+
+```bash
+docker compose up --build dataset-check
 ```

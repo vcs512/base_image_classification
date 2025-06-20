@@ -52,8 +52,9 @@ class Classifier:
             transformers.modeling_outputs.ImageClassifierOutput:
                 Classifier model output (raw)
         """
-        inputs = self.processor(images=input_batch, return_tensors="pt")
-        inputs = {k: v.to(self.device) for k, v in inputs.items()}
+        inputs = self.processor(images=input_batch, return_tensors="pt").to(
+            self.device
+        )
         outputs = self.model(**inputs)
         return outputs
 
@@ -89,3 +90,11 @@ class Classifier:
             batch_labels_scores_list.append(image_labels_scores_list)
 
         return batch_labels_scores_list
+
+    def get_processor(self) -> ViTImageProcessor:
+        """Return the image processor
+
+        Returns:
+            ViTImageProcessor: Model image processor
+        """
+        return self.processor
